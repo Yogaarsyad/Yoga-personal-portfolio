@@ -1,51 +1,68 @@
-import ProfileImage from '../../assets/image1.svg';
+import { motion } from 'framer-motion';
+import SmpImage from '../../assets/smp.svg';
+import SmaImage from '../../assets/sma.svg';
+import KuliahImage from '../../assets/kuliah.svg';
 
 const educationData = [
   {
-    institution: "SMP Negeri 1 Sembalun",
-    period: "2014-2017",
-    description: "Junior High School Education"
+    image: SmpImage,
+    institution: "SMP ISLAM TERPADU AIKMEL",
+    address: "Jln. Raya Aikmel, Lombok Timur",
+    period: "2017 - 2020"
   },
   {
-    institution: "SMA Negeri 1 Selong",
-    period: "2017-2020",
-    description: "Science Program"
+    image: SmaImage,
+    institution: "SMA ISLAM ASSUNNAH LOMBOK",
+    address: "Jln. TGH. Hasanain, Pancor, Lombok Timur",
+    period: "2020 - 2023"
   },
   {
+    image: KuliahImage,
     institution: "Universitas Indonesia",
-    period: "2023-Present",
-    description: "Computer Engineering, Faculty of Engineering"
+    address: "Kampus UI Depok, Jawa Barat",
+    period: "2023 - Present"
   }
 ];
 
 export default function Education() {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Institution</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Period</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {educationData.map((item, index) => (
-            <tr key={index}>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0 h-10 w-10 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
-                    <img src={ProfileImage} alt="Institution" className="h-6 w-6" />
-                  </div>
-                  <div className="text-sm font-medium text-gray-900">{item.institution}</div>
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.period}</td>
-              <td className="px-6 py-4 text-sm text-gray-500">{item.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="px-4 py-8 bg-gradient-to-b from-white to-blue-50">
+      <h2 className="text-2xl font-bold text-center text-black mb-8">My Education Journey</h2>
+      <div className="flex flex-col items-center space-y-10">
+        {educationData.map((item, index) => (
+          <motion.div
+            key={index}
+            className="bg-white shadow-lg rounded-xl p-6 w-full max-w-3xl text-center"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+          >
+            <img
+              src={item.image}
+              alt={item.institution}
+              className="w-full h-80 object-contain mb-4 rounded-lg border border-gray-200"
+            />
+            <motion.div
+              className="text-xl font-semibold text-black mb-1"
+              whileHover={{ scale: 1.05, color: '#1D4ED8' }}
+            >
+              {item.institution}
+            </motion.div>
+            <motion.div
+              className="text-sm text-black mb-1"
+              whileHover={{ scale: 1.05, color: '#1D4ED8' }}
+            >
+              {item.address}
+            </motion.div>
+            <motion.div
+              className="text-sm font-medium text-black"
+              whileHover={{ scale: 1.05, color: '#1D4ED8' }}
+            >
+              {item.period}
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }

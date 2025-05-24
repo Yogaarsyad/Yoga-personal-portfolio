@@ -24,7 +24,7 @@ export default function Welcome() {
             <img src={ProfileImage} alt="Tri Yoga Arsyad" className="w-full h-full object-cover" />
           </div>
 
-          <h1 className="text-5xl font-extrabold text-gray-900 mb-2">Tri Yoga Arsyad</h1>
+          <h1 className="text-5xl font-extrabold text-gray-900 mb-2">Welcome</h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-6">
             I am a <strong>Computer Engineering student</strong>.
           </p>
