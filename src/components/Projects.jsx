@@ -137,7 +137,7 @@ export default function Projects() {
           Welcome to my project page! Here, I share the different works and projects I've been involved in. 
           This page is a space for you to explore a variety of my creations, whether they're personal 
           projects or team collaborations. Each project reflects the skills and effort I put into my work.
-          Feel free to browse around and get to know what I'm capable of.
+          Feel free to browse around and get to know what I'm capable of.🚀
         </div>
 
         {/* Main container */}

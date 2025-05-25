@@ -24,30 +24,8 @@ const projects = [
   },
 ];
 
-// Hook untuk deteksi elemen muncul di viewport
-function useOnScreen(ref) {
-  const [isIntersecting, setIntersecting] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIntersecting(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
-  }, [ref]);
-
-  return isIntersecting;
-}
-
 export default function Projects() {
-  const projectRefs = projects.map(() => React.createRef());
+  const projectRefs = projects.map(() => useRef(null));
   const [modalImage, setModalImage] = useState(null);
   const [animateTitle, setAnimateTitle] = useState(false);
   const [animateIntro, setAnimateIntro] = useState(false);
@@ -72,27 +50,28 @@ export default function Projects() {
     <>
       <style>{`
         @keyframes colorPulse {
-          0%, 100% { color: #333333; }
-          50% { color: #555555; }
+          0%, 100% {
+            color: #333333;
+          }
+          50% {
+            color: #555555;
+          }
         }
         .animated-projects {
           animation: colorPulse 3s ease-in-out infinite;
         }
         @keyframes fadeSlideUp {
-          0% { opacity: 0; transform: translateY(20px); }
-          100% { opacity: 1; transform: translateY(0); }
+          0% {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
         .animated-intro {
           animation: fadeSlideUp 1s ease forwards;
-        }
-        .fade-slide-up {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .fade-slide-up.visible {
-          opacity: 1;
-          transform: translateY(0);
         }
       `}</style>
 
@@ -149,7 +128,7 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Intro paragraph */}
+        {/* Intro paragraph dengan animasi */}
         <div
           className={`max-w-3xl mx-auto px-4 py-6 text-center text-gray-700 text-base leading-relaxed ${
             animateIntro ? "animated-intro" : "opacity-0"
@@ -158,7 +137,7 @@ export default function Projects() {
           Welcome to my project page! Here, I share the different works and projects I've been involved in. 
           This page is a space for you to explore a variety of my creations, whether they're personal 
           projects or team collaborations. Each project reflects the skills and effort I put into my work.
-          Feel free to browse around and get to know what I'm capable of.
+          Feel free to browse around and get to know what I'm capable of.🚀
         </div>
 
         {/* Main container */}
@@ -166,68 +145,61 @@ export default function Projects() {
           {/* Left: projects with padding right for sidebar */}
           <div className="pr-[20rem]">
             <div className="flex flex-col space-y-14">
-              {projects.map((project, index) => {
-                const ref = projectRefs[index];
-                const isVisible = useOnScreen(ref);
-
-                return (
-                  <div
-                    key={index}
-                    ref={ref}
-                    className={`w-full bg-gray-50 border border-gray-300 rounded-xl shadow p-8 scroll-mt-24 fade-slide-up ${
-                      isVisible ? "visible" : ""
-                    }`}
-                  >
-                    {project.image ? (
-                      <>
-                        <h3 className="text-3xl font-semibold text-black mb-8">
-                          {project.title}
-                        </h3>
-
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          onClick={() => openModal(project.image)}
-                          className="w-full object-contain rounded-md shadow-md mb-10 cursor-zoom-in transition-transform hover:scale-105 duration-300 bg-transparent"
-                          style={{ maxHeight: "800px" }}
-                        />
-
-                        {project.description && (
-                          <p className="mb-6 text-gray-700 text-base whitespace-pre-line">
-                            {project.description}
-                          </p>
-                        )}
-
-                        {project.github && (
-                          <table className="w-full border-collapse border border-gray-400">
-                            <tbody>
-                              <tr className="border border-gray-400 bg-gray-100">
-                                <td className="p-4 font-semibold text-black border border-gray-400 w-1/3">
-                                  GitHub Repository
-                                </td>
-                                <td className="p-4 border border-gray-400 break-all">
-                                  <a
-                                    href={project.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-blue-600 hover:underline"
-                                  >
-                                    {project.github}
-                                  </a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        )}
-                      </>
-                    ) : (
-                      <div className="text-center text-gray-500 italic text-lg">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  ref={projectRefs[index]}
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl shadow p-8 scroll-mt-24"
+                >
+                  {project.image ? (
+                    <>
+                      <h3 className="text-3xl font-semibold text-black mb-8">
                         {project.title}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                      </h3>
+
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        onClick={() => openModal(project.image)}
+                        className="w-full object-contain rounded-md shadow-md mb-10 cursor-zoom-in transition-transform hover:scale-105 duration-300 bg-transparent"
+                        style={{ maxHeight: "800px" }}
+                      />
+
+                      {project.description && (
+                        <p className="mb-6 text-gray-700 text-base whitespace-pre-line">
+                          {project.description}
+                        </p>
+                      )}
+
+                      {project.github && (
+                        <table className="w-full border-collapse border border-gray-400">
+                          <tbody>
+                            <tr className="border border-gray-400 bg-gray-100">
+                              <td className="p-4 font-semibold text-black border border-gray-400 w-1/3">
+                                GitHub Repository
+                              </td>
+                              <td className="p-4 border border-gray-400 break-all">
+                                <a
+                                  href={project.github}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:underline"
+                                >
+                                  {project.github}
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      )}
+                    </>
+                  ) : (
+                    <div className="text-center text-gray-500 italic text-lg">
+                      {project.title}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
