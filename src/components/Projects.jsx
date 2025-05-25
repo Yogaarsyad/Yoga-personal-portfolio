@@ -73,6 +73,11 @@ export default function Projects() {
         .animated-intro {
           animation: fadeSlideUp 1s ease forwards;
         }
+        /* Ensure images are responsive */
+        img {
+          max-width: 100%;
+          height: auto;
+        }
       `}</style>
 
       <div className="bg-white min-h-screen relative">
@@ -128,7 +133,7 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Intro paragraph dengan animasi */}
+        {/* Intro paragraph with animation */}
         <div
           className={`max-w-3xl mx-auto px-4 py-6 text-center text-gray-700 text-base leading-relaxed ${
             animateIntro ? "animated-intro" : "opacity-0"
@@ -142,8 +147,8 @@ export default function Projects() {
 
         {/* Main container */}
         <div className="max-w-7xl mx-auto px-4 pb-20 relative">
-          {/* Left: projects with padding right for sidebar */}
-          <div className="pr-[20rem]">
+          {/* Left: projects with responsive padding */}
+          <div className="lg:pr-[20rem] pr-0">
             <div className="flex flex-col space-y-14">
               {projects.map((project, index) => (
                 <div
@@ -161,7 +166,7 @@ export default function Projects() {
                         src={project.image}
                         alt={project.title}
                         onClick={() => openModal(project.image)}
-                        className="w-full object-contain rounded-md shadow-md mb-10 cursor-zoom-in transition-transform hover:scale-105 duration-300 bg-transparent"
+                        className="w-full max-w-full h-auto object-contain rounded-md shadow-md mb-10 cursor-zoom-in transition-transform hover:scale-105 duration-300 bg-transparent"
                         style={{ maxHeight: "800px" }}
                       />
 
@@ -203,9 +208,9 @@ export default function Projects() {
             </div>
           </div>
 
-          {/* Right: sidebar fixed */}
+          {/* Right: sidebar fixed on large screens only */}
           <div
-            className="w-72 fixed right-8 top-32 bg-gray-50 border border-gray-300 rounded-xl p-6 shadow-md z-40"
+            className="hidden lg:block w-72 fixed right-8 top-32 bg-gray-50 border border-gray-300 rounded-xl p-6 shadow-md z-40"
           >
             <h4 className="text-xl font-bold mb-6">Daftar Project</h4>
             <ul className="space-y-5">
@@ -221,7 +226,7 @@ export default function Projects() {
               ))}
             </ul>
           </div>
-        </div>
+        </div>  
       </div>
     </>
   );
