@@ -5,10 +5,10 @@ export default function ContactInfo() {
   const contacts = [
     { name: 'Email', link: 'mailto:08trioga08@gmail.com', display: '08trioga08@gmail.com', icon: <FiMail /> },
     { name: 'Phone', link: 'tel:+6287765527489', display: '087765527489', icon: <FiPhone /> },
-    { name: 'LinkedIn', link: 'https://bit.ly/tri-yoga-arsyad', display: 'https://bit.ly/tri-yoga-arsyad', icon: <FiLinkedin /> },
-    { name: 'GitHub', link: 'https://bit.ly/Yogaarsyad', display: 'https://bit.ly/Yogaarsyad', icon: <FiGithub /> },
-    { name: 'Download CV', link: '#', display: '(coming soon)', icon: <FiDownload /> },
-    { name: 'Instagram', link: 'https://bit.ly/43zydfD', display: 'https://bit.ly/43zydfD', icon: <FiInstagram /> },
+    { name: 'LinkedIn', link: 'https://www.linkedin.com/in/tri-yoga-arsyad-6b993a293/', display: 'LinkedIn', icon: <FiLinkedin /> },
+    { name: 'GitHub', link: 'https://github.com/Yogaarsyad', display: 'GitHub', icon: <FiGithub /> },
+    { name: 'Download CV', link: 'https://drive.google.com/file/d/14H8xeSB2ZdX15RoDNLhO_QFk1br1m-eh/view?usp=drive_link', display: 'Download My CV Here', icon: <FiDownload /> },
+    { name: 'Instagram', link: 'https://www.instagram.com/yoga.arsyad?igsh=MTNkOHRrNnpsZmE4cw%3D%3D&utm_source=qr', display: 'Instagram', icon: <FiInstagram /> },
   ];
 
   return (
