@@ -12,7 +12,7 @@ const project1 = {
 const project2 = {
   title: "Project 2 - Engineering Math Notes",
   image: "/mtk.svg",
-  link: "https://drive.google.com/file/d/1K3KpO5i4v2yARkOBhu7XJPGCIoQbEV8r/view?usp=sharing",
+  link: "https://drive.google.com/file/d/1CM0jAdhZZXBERQ85cF-yjC-SWigXJfcJ/view?usp=drive_link",
   description:
     "These are my lecture notes for the Engineering Mathematics course at FTUI. You might find them interesting to study. Hope they’re helpful!",
 };
